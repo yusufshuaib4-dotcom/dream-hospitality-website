@@ -66,7 +66,7 @@ def head(page, title, description):
   <link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-  <link rel="stylesheet" href="assets/css/style.css?v=2">"""
+  <link rel="stylesheet" href="assets/css/style.css?v=3">"""
 
 
 ORG_JSONLD = f"""
@@ -77,7 +77,7 @@ ORG_JSONLD = f"""
     "name": "{COMPANY}",
     "legalName": "DREAM HOSPITALITY SDN. BHD.",
     "url": "{SITE}",
-    "logo": "{SITE}assets/img/dream-hospitality-logo.jpeg",
+    "logo": "{SITE}assets/img/dream-hospitality-logo.svg",
     "identifier": "{REG}",
     "address": {{
       "@type": "PostalAddress",
@@ -104,7 +104,7 @@ def header(page):
   <header class="site-header">
     <nav class="wrap nav" aria-label="Main">
       <a class="brand" href="index.html" aria-label="Dream Hospitality, home">
-        <img src="assets/img/dream-hospitality-logo.jpeg" alt="" width="64" height="60">
+        <img src="assets/img/dream-hospitality-logo.svg" alt="" width="64" height="60">
         <span>Dream<span class="brand-sub">Hospitality</span></span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span>Menu</span><span aria-hidden="true" class="menu-icon"></span></button>
@@ -122,7 +122,7 @@ def footer():
   <footer class="site-footer">
     <div class="wrap footer-grid">
       <div>
-        <a class="footer-brand" href="index.html"><img src="assets/img/dream-hospitality-logo.jpeg" alt="Dream Hospitality" width="96" height="90"></a><p class="footer-company">{COMPANY}</p>
+        <a class="footer-brand" href="index.html"><img src="assets/img/dream-hospitality-logo.svg" alt="Dream Hospitality" width="96" height="90"></a><p class="footer-company">{COMPANY}</p>
         <p>Registration No. {REG}</p>
         <p>{ADDRESS_LINE}</p>
       </div>
@@ -137,7 +137,7 @@ def footer():
       </div>
     </div>
   </footer>
-  <script src="assets/js/main.js?v=2" defer></script>
+  <script src="assets/js/main.js?v=3" defer></script>
 </body>
 </html>
 """
@@ -155,7 +155,7 @@ def page_hero(label, title, lead):
     </section>"""
 
 
-def cta_band(title="Hospitality technology, closer to home.", text="Based at Exchange 106 in Kuala Lumpur. Find our business address and the latest contact information.", btn="Find our office"):
+def cta_band(title="Hospitality technology, closer to home.", text="Based at Exchange 106 in Kuala Lumpur. Find our business address and the latest contact information.", btn="Prepare a property brief"):
     return f"""
     <section class="section">
       <div class="wrap">
@@ -164,7 +164,7 @@ def cta_band(title="Hospitality technology, closer to home.", text="Based at Exc
             <h2>{title}</h2>
             <p>{text}</p>
           </div>
-          <a class="btn btn-light" href="contact.html">{btn}</a>
+          <a class="btn btn-light" href="contact.html#property-brief">{btn}</a>
         </div>
       </div>
     </section>"""
@@ -188,7 +188,7 @@ PAGES["index.html"] = dict(
         </div>
         <div class="hero-identity">
           <div class="identity-caption"><span>Dream Hospitality</span><span>Malaysia · Est. 2026</span></div>
-          <img class="hero-logo" src="assets/img/dream-hospitality-logo.jpeg" alt="Dream Hospitality circular logo, Registration No. 202601013644" width="1080" height="991" fetchpriority="high">
+          <img class="hero-logo" src="assets/img/dream-hospitality-logo.svg" alt="Dream Hospitality circular logo, Registration No. 202601013644" width="600" height="600" fetchpriority="high">
           <p>Practical. Affordable. Locally supported.</p>
         </div>
       </div>
@@ -216,7 +216,7 @@ PAGES["index.html"] = dict(
       <div class="audience-grid"><article><span class="audience-symbol" aria-hidden="true">✦</span><h3>Hotels &amp; resorts</h3><p>Independent and boutique properties looking for more direct bookings and simpler day-to-day operations.</p></article><article><span class="audience-symbol" aria-hidden="true">◈</span><h3>Rentals &amp; serviced apartments</h3><p>Operators managing multiple units who need easier arrivals and better guest communication.</p></article><article><span class="audience-symbol" aria-hidden="true">◎</span><h3>Growing hotel groups</h3><p>Small and mid-sized groups that need consistent systems and support across their properties.</p></article></div></div>
     </section>
     <section class="section section-alt"><div class="wrap split"><div><span class="label">The Dream approach</span><h2>Technology with<br>hospitality at its heart.</h2><a class="text-link" href="about.html">Get to know Dream Hospitality</a></div><ul class="checks"><li><strong>More direct bookings.</strong> Help properties welcome guests through their own channels.</li><li><strong>Simpler operations.</strong> Reduce manual steps across the front desk and housekeeping.</li><li><strong>A better guest experience.</strong> Make arrivals and communication feel easier.</li></ul></div></section>
-    """ + cta_band("Your property. Your next chapter.", "Explore hospitality technology with a Malaysian company focused on practical software and local support.", "Find our office"),
+    """ + cta_band("Your property. Your next chapter.", "Explore hospitality technology with a Malaysian company focused on practical software and local support.", "Plan your property brief"),
 )
 
 
@@ -447,12 +447,15 @@ PAGES["contact.html"] = dict(
 )
 
 
+from enhancements import apply
+ENQUIRY_READY = apply(PAGES, page_hero, cta_band)
+
 def build():
     for page, p in PAGES.items():
         html = head(page, p["title"], p["description"])
         if p.get("jsonld"):
             html += ORG_JSONLD
-        html += header(page) + '  <main id="main">' + p["body"] + "\n  </main>\n" + footer()
+        html += header(p.get("nav_parent", page)) + '  <main id="main">' + p["body"] + "\n  </main>\n" + footer()
         (ROOT / page).write_text(html, encoding="utf-8")
     urls = "\n".join(
         f"  <url>\n    <loc>{SITE if pg == 'index.html' else SITE + pg}</loc>\n    <lastmod>{LASTMOD}</lastmod>\n  </url>"

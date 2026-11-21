@@ -25,3 +25,11 @@ Company confirmation is still needed for email, telephone, domain and final cont
 ## Hosting
 
 GitHub Pages publishes `main` from the repository root. When changing the domain, update `SITE` in the generator, `robots.txt`, and the absolute base paths in `404.html`, then rebuild.
+
+## Product details and property briefs
+
+Four detail pages expand the planned product scope, with use cases, example journeys and FAQs. They are generated from `_build/enhancements.py`. The contact page includes a browser-only property brief builder with copy/download options. It sends no data and stores no answers.
+
+`_build/site-config.json` holds the confirmed contact email/phone and privacy readiness. These are currently unset. The enquiry-email form is implemented but not displayed until the recipient email, approved privacy notice and privacy contact are confirmed. It prepares an email for the visitor to review and send in their own email app; it is not a server-delivered form. Before enabling it, replace the privacy draft's unresolved fields and approval status, and add its footer link. Automatic email delivery would require selecting and connecting a form service.
+
+The crisp company logo is `assets/img/dream-hospitality-logo.svg`; the original supplied JPEG is retained. No domain settings were changed.
