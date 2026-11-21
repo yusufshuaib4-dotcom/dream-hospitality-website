@@ -8,7 +8,7 @@
   <title>Privacy Notice / Notis Privasi | Dream Hospitality</title>
   <link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=2">
   <style>
     .doc { max-width: 760px; padding: 56px 24px 72px; margin: 0 auto; }
     .doc h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
@@ -26,10 +26,10 @@
   <header class="site-header">
     <nav class="wrap nav" aria-label="Main">
       <a class="brand" href="index.html" aria-label="Dream Hospitality, home">
-        <img src="assets/img/mark.svg" alt="" width="34" height="34">
-        <span>Dream Hospitality</span>
+        <img src="assets/img/dream-hospitality-logo.jpeg" alt="" width="64" height="60">
+        <span>Dream<span class="brand-sub">Hospitality</span></span>
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span>Menu</span><span aria-hidden="true" class="menu-icon"></span></button>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="products.html">Products</a></li>
@@ -40,8 +40,9 @@
     </nav>
   </header>
 
-  <main class="doc">
-    <p class="draft"><strong>Draft for company review</strong> — not yet approved or published. / <strong>Draf untuk semakan syarikat</strong> — belum diluluskan atau diterbitkan.</p>
+
+  <main id="main" class="doc">
+    <p class="draft"><strong>Draft for company review</strong> — not yet approved. / <strong>Draf untuk semakan syarikat</strong> — belum diluluskan.</p>
 
     <h1>Privacy Notice / Notis Privasi</h1>
     <p class="meta">Dream Hospitality Sdn. Bhd. (Registration No. 202601013644 (1675742-D)) · Last updated: <!-- DATE OF APPROVAL -->[date]</p>
@@ -174,15 +175,28 @@
     </section>
   </main>
 
+  
   <footer class="site-footer">
     <div class="wrap footer-grid">
       <div>
-        <p class="footer-company">Dream Hospitality Sdn. Bhd.</p>
+        <a class="footer-brand" href="index.html"><img src="assets/img/dream-hospitality-logo.jpeg" alt="Dream Hospitality" width="96" height="90"></a><p class="footer-company">Dream Hospitality Sdn. Bhd.</p>
         <p>Registration No. 202601013644 (1675742-D)</p>
+        <p>Suite T-77, Exchange 106, Lingkaran TRX, 55188 Kuala Lumpur, Malaysia</p>
       </div>
-      <div><p><a href="index.html">Back to home</a></p></div>
+      <nav aria-label="Footer">
+        <ul class="footer-links">
+          <li><a href="products.html">Products</a></li>
+          <li><a href="consultancy.html">Consultancy</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p>&copy; <span id="year">2026</span> Dream Hospitality Sdn. Bhd. All rights reserved.</p>
+        <!-- PRIVACY: link the notice here once approved: <p><a href="privacy-notice.html">Privacy Notice / Notis Privasi</a></p> -->
+      </div>
     </div>
   </footer>
-  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/main.js?v=2" defer></script>
 </body>
 </html>
