@@ -14,7 +14,7 @@ SITE = "https://yusufshuaib4-dotcom.github.io/dream-hospitality-website/"
 COMPANY = "Dream Hospitality Sdn. Bhd."
 REG = "202601013644 (1675742-D)"
 ADDRESS_LINE = "Suite T-77, Exchange 106, Lingkaran TRX, 55188 Kuala Lumpur, Malaysia"
-LASTMOD = "2026-11-21"
+LASTMOD = "2026-11-27"
 
 NAV = [
     ("index.html", "Home"),
@@ -66,7 +66,7 @@ def head(page, title, description):
   <link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-  <link rel="stylesheet" href="assets/css/style.css?v=3">"""
+  <link rel="stylesheet" href="assets/css/style.css?v=4">"""
 
 
 ORG_JSONLD = f"""
@@ -137,7 +137,7 @@ def footer():
       </div>
     </div>
   </footer>
-  <script src="assets/js/main.js?v=3" defer></script>
+  <script src="assets/js/main.js?v=4" defer></script>
 </body>
 </html>
 """

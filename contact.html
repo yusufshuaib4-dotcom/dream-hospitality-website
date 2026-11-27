@@ -22,7 +22,7 @@
   <link rel="icon" href="assets/img/mark.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-  <link rel="stylesheet" href="assets/css/style.css?v=3">
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -76,9 +76,9 @@
       </div>
     </section><section class="section section-alt" id="property-brief"><div class="wrap enquiry-layout"><div><span class="label">Plan your next step</span><h2>What does your property need?</h2><p>Build a short brief to help organise a future conversation about your technology.</p><p class="note">This tool works only in your browser. It does not send anything to Dream Hospitality or save your answers. Please do not include personal or guest information.</p></div><div><form id="brief-form">
  <div class="form-grid"><div><label for="property-type">Property type</label><select id="property-type" name="propertyType" required><option value="">Choose a type</option><option>Independent or boutique hotel</option><option>Resort</option><option>Vacation rental</option><option>Serviced apartments</option><option>Hotel group</option></select></div><div><label for="property-size">Rooms or units</label><select id="property-size" name="propertySize" required><option value="">Choose a range</option><option>1–10</option><option>11–30</option><option>31–75</option><option>76–150</option><option>151+</option><option>Still planning</option></select></div></div>
- <fieldset class="needs"><legend>What would you like to improve?</legend><span class="field-help">Choose one or more.</span><label><input type="checkbox" name="needs" value="Direct bookings and availability">Direct bookings and availability</label><label><input type="checkbox" name="needs" value="Check-in and arrival">Check-in and arrival</label><label><input type="checkbox" name="needs" value="Guest communication and feedback">Guest communication and feedback</label><label><input type="checkbox" name="needs" value="Reservations, front desk and housekeeping">Reservations, front desk and housekeeping</label><label><input type="checkbox" name="needs" value="System selection or IT support">System selection or IT support</label><p class="field-error" id="needs-error" hidden>Please choose at least one area to improve.</p></fieldset>
+ <fieldset class="needs" aria-describedby="needs-error"><legend>What would you like to improve?</legend><span class="field-help">Choose one or more.</span><label><input type="checkbox" name="needs" value="Direct bookings and availability">Direct bookings and availability</label><label><input type="checkbox" name="needs" value="Check-in and arrival">Check-in and arrival</label><label><input type="checkbox" name="needs" value="Guest communication and feedback">Guest communication and feedback</label><label><input type="checkbox" name="needs" value="Reservations, front desk and housekeeping">Reservations, front desk and housekeeping</label><label><input type="checkbox" name="needs" value="System selection or IT support">System selection or IT support</label><p class="field-error" id="needs-error" role="alert" hidden>Please choose at least one area to improve.</p></fieldset>
  <div class="form-grid"><div><label for="property-stage">Current stage</label><select id="property-stage" name="stage" required><option value="">Choose a stage</option><option>Planning a new property</option><option>Running an existing property</option><option>Expanding a group or portfolio</option></select></div><div><label for="property-timing">Preferred timing</label><select id="property-timing" name="timing" required><option value="">Choose a timeframe</option><option>Just exploring</option><option>Within 3 months</option><option>Within 6 months</option><option>Later / not decided</option></select></div></div><p class="note">Software is in development, with first modules planned for 2027. Selecting a timeframe does not reserve a product or confirm availability.</p><button type="submit" class="btn btn-dark">Prepare my brief</button><noscript><p>This browser tool needs JavaScript. You can instead note your property type, size and technology needs for a future enquiry.</p></noscript></form>
- <section id="brief-result" class="brief-result" aria-labelledby="brief-title" hidden><h3 id="brief-title" tabindex="-1">Your property brief</h3><pre id="brief-text"></pre><p>Prepared on this device. Nothing has been sent.</p><div class="cta-row"><button type="button" class="btn btn-dark" id="copy-brief">Copy brief</button><button type="button" class="btn btn-ghost" id="download-brief">Download brief</button></div><p id="brief-status" role="status" aria-live="polite"></p></section></div></div></section>
+ <section id="brief-result" class="brief-result" aria-labelledby="brief-title" hidden><h3 id="brief-title" tabindex="-1">Your property brief</h3><pre id="brief-text"></pre><p>Prepared on this device. Nothing has been sent.</p><div class="cta-row"><button type="button" class="btn btn-dark" id="copy-brief">Copy brief</button><a class="btn btn-ghost" id="download-brief" download="dream-hospitality-property-brief.txt">Download brief (.txt)</a><a class="text-link" id="view-brief" target="_blank" rel="noopener">Open text version</a></div><p id="brief-status" role="status" aria-live="polite"></p></section></div></div></section>
   </main>
 
   <footer class="site-footer">
@@ -102,6 +102,6 @@
       </div>
     </div>
   </footer>
-  <script src="assets/js/main.js?v=3" defer></script>
+  <script src="assets/js/main.js?v=4" defer></script>
 </body>
 </html>

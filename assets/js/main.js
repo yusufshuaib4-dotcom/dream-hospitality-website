@@ -14,10 +14,27 @@
 
 (function(){
  'use strict';
- var form=document.getElementById('brief-form'),summary='';
+ var form=document.getElementById('brief-form'),summary='',briefUrl='';
  if(form){
   var result=document.getElementById('brief-result'),error=document.getElementById('needs-error'),status=document.getElementById('brief-status');
-  function clear(){result.hidden=true;summary='';status.textContent='';}
+  var downloadLink=document.getElementById('download-brief'),viewLink=document.getElementById('view-brief');
+  function clear(){
+   result.hidden=true;summary='';status.textContent='';
+   downloadLink.removeAttribute('href');viewLink.removeAttribute('href');
+   if(briefUrl){URL.revokeObjectURL(briefUrl);briefUrl='';}
+  }
+  window.addEventListener('pagehide',function(){
+   if(briefUrl){URL.revokeObjectURL(briefUrl);briefUrl='';}
+  });
+  window.addEventListener('pageshow',function(){
+   if(summary&&!briefUrl)prepareDownload();
+  });
+  function prepareDownload(){
+   if(briefUrl)URL.revokeObjectURL(briefUrl);
+   // Keep a real link alive until answers change, rather than clicking a temporary link.
+   briefUrl=URL.createObjectURL(new Blob(['\ufeff'+summary.replace(/\n/g,'\r\n')+'\r\n'],{type:'text/plain;charset=utf-8'}));
+   downloadLink.href=briefUrl;viewLink.href=briefUrl;
+  }
   form.addEventListener('input',function(){clear();error.hidden=true;});
   form.addEventListener('change',function(){clear();error.hidden=true;});
   form.addEventListener('submit',function(e){
@@ -25,15 +42,20 @@
    if(!needs.length){error.hidden=false;form.querySelector('input[name="needs"]').focus();return;}
    error.hidden=true;
    summary=['PROPERTY TECHNOLOGY BRIEF','Property type: '+data.get('propertyType'),'Rooms or units: '+data.get('propertySize'),'Current stage: '+data.get('stage'),'Preferred timing: '+data.get('timing'),'','Areas to improve:',...needs.map(function(n){return '• '+n;}),'','Dream Hospitality software is in development; first modules are planned for 2027.','Prepared on this device. This brief has not been sent.'].join('\n');
-   document.getElementById('brief-text').textContent=summary;result.hidden=false;document.getElementById('brief-title').focus();
+   prepareDownload();document.getElementById('brief-text').textContent=summary;result.hidden=false;document.getElementById('brief-title').focus();
   });
   document.getElementById('copy-brief').addEventListener('click',async function(){
    if(!summary)return;
-   try{await navigator.clipboard.writeText(summary);status.textContent='Brief copied. You can paste it into a document or email.';}
-   catch(e){status.textContent='Copy was unavailable. Please select the brief text to copy it, or use Download brief.';}
+   var copiedSummary=summary;
+   try{
+    if(!navigator.clipboard)throw new Error('Clipboard unavailable');
+    await Promise.race([navigator.clipboard.writeText(copiedSummary),new Promise(function(_,reject){setTimeout(function(){reject(new Error('Clipboard confirmation timed out'));},2000);})]);
+    if(summary===copiedSummary)status.textContent='Brief copied. You can paste it into a document or email.';
+   }
+   catch(e){if(summary===copiedSummary)status.textContent='Copy could not be confirmed. Please select the brief text to copy it, or use Download brief (.txt).';}
   });
-  document.getElementById('download-brief').addEventListener('click',function(){
-   if(!summary)return;var url=URL.createObjectURL(new Blob([summary],{type:'text/plain;charset=utf-8'}));var link=document.createElement('a');link.href=url;link.download='dream-hospitality-property-brief.txt';document.body.appendChild(link);link.click();link.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);status.textContent='Brief prepared for download. Nothing has been sent.';
+  downloadLink.addEventListener('click',function(){
+   status.textContent='Download requested. Check your browser downloads. If it does not start, use Open text version to view and save your brief. Nothing has been sent.';
   });
  }
  var enquiry=document.getElementById('enquiry-form');

@@ -33,3 +33,7 @@ Four detail pages expand the planned product scope, with use cases, example jour
 `_build/site-config.json` holds the confirmed contact email/phone and privacy readiness. These are currently unset. The enquiry-email form is implemented but not displayed until the recipient email, approved privacy notice and privacy contact are confirmed. It prepares an email for the visitor to review and send in their own email app; it is not a server-delivered form. Before enabling it, replace the privacy draft's unresolved fields and approval status, and add its footer link. Automatic email delivery would require selecting and connecting a form service.
 
 The crisp company logo is `assets/img/dream-hospitality-logo.svg`; the original supplied JPEG is retained. No domain settings were changed.
+
+## Brief downloads
+
+The brief builder creates a persistent browser download link to a UTF-8 text file. The same file has an Open text version fallback. Downloads contain only the selected brief answers, stay on the visitor’s device and require no email or form service. Links are refreshed whenever the brief changes; old file URLs are released.
